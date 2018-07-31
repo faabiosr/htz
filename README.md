@@ -58,6 +58,36 @@ func main() {
 }
 ```
 
+## Available checkers
+
+### DB
+```go
+package main
+
+import (
+	"database/sql"
+	"encoding/json"
+	"fmt"
+	"github.com/fabiorphp/htz"
+	"github.com/fabiorphp/htz/checker"
+	_"github.com/lib/pq"
+)
+
+func main() {
+	conn := "user=htz dbname=htz"
+	db, _ := sql.Open("postgres", conn)
+
+	checkers := []htz.Checker{
+		checker.DB(db, true),
+	}
+
+	h := htz.New("my-app", "0.0.1", checkers...)
+	res, _ := json.MarshalIndent(h.Check(), "", "  ")
+
+	fmt.Println(string(res))
+}
+```
+
 ## Development
 
 ### Requirements
