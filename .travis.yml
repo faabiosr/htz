@@ -1,7 +1,11 @@
 language: go
+
 go:
   - "1.10"
   - "tip"
+
+services:
+  - redis-server
 
 install:
   - make depend
