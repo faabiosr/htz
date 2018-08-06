@@ -108,14 +108,51 @@ import (
 )
 
 func main() {
-	conn := "user=htz dbname=htz"
-	db, _ := sql.Open("postgres", conn)
+	db, _ := sql.Open("postgres", "user=htz dbname=htz")
 
-	checkers := []htz.Checker{
-		checker.DB(db, true),
-	}
+	h := htz.New("my-app", "0.0.1", checker.DB(db, true))
+	res, _ := json.MarshalIndent(h.Check(), "", "  ")
 
-	h := htz.New("my-app", "0.0.1", checkers...)
+	fmt.Println(string(res))
+}
+```
+
+### Redis
+```go
+package main
+
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/fabiorphp/htz"
+	"github.com/fabiorphp/htz/checker"
+    "github.com/go-redis/redis"
+)
+
+func main() {
+    client := redis.NewClient(&redis.Options{
+        Addr: "localhost:6379",
+    })
+
+	h := htz.New("my-app", "0.0.1", checker.Redis(client, true))
+	res, _ := json.MarshalIndent(h.Check(), "", "  ")
+
+	fmt.Println(string(res))
+}
+```
+
+### Runtime
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/fabiorphp/htz"
+	"github.com/fabiorphp/htz/checker"
+)
+
+func main() {
+	h := htz.New("my-app", "0.0.1", checker.Runtime(false))
 	res, _ := json.MarshalIndent(h.Check(), "", "  ")
 
 	fmt.Println(string(res))
