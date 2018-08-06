@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
+	"net/http"
+	"net/http/httptest"
 	"testing"
 	"time"
 )
@@ -13,6 +15,8 @@ type (
 		suite.Suite
 
 		assert *assert.Assertions
+		mux    *http.ServeMux
+		server *httptest.Server
 	}
 )
 
@@ -22,6 +26,8 @@ const (
 
 func (s *HealthTestSuite) SetupTest() {
 	s.assert = assert.New(s.T())
+	s.mux = http.NewServeMux()
+	s.server = httptest.NewServer(s.mux)
 }
 
 func (s *HealthTestSuite) TestFactory() {
@@ -70,6 +76,46 @@ func (s *HealthTestSuite) TestWithCheckers() {
 
 	s.assert.Contains(string(res), "test-service")
 	s.assert.Contains(string(res), "unknown")
+}
+
+func (s *HealthTestSuite) TestHttpHandlerWithWrongMethod() {
+	s.mux.Handle("/health", New("app", "0.0.1"))
+
+	req, _ := http.NewRequest(http.MethodPost, s.server.URL+"/health", nil)
+	res, _ := http.DefaultClient.Do(req)
+
+	s.assert.Equal(http.StatusNotFound, res.StatusCode)
+}
+
+func (s *HealthTestSuite) TestHttpHandler() {
+	checkers := []Checker{
+		func() *Check {
+			return &Check{
+				Name:         "test",
+				Status:       true,
+				ResponseTime: 2 * time.Second,
+				Optional:     true,
+			}
+		},
+	}
+
+	s.mux.Handle("/health", New("app", "0.0.1", checkers...))
+
+	req, _ := http.NewRequest(http.MethodGet, s.server.URL+"/health", nil)
+	res, _ := http.DefaultClient.Do(req)
+
+	var status Status
+
+	err := json.NewDecoder(res.Body).Decode(&status)
+
+	s.assert.NoError(err)
+
+	s.assert.Equal(http.StatusOK, res.StatusCode)
+	s.assert.Equal("app", status.Name)
+	s.assert.Equal("0.0.1", status.Version)
+	s.assert.True(status.Status)
+	s.assert.NotEmpty(status.Date)
+	s.assert.Len(status.Checks, 1)
 }
 
 func TestHealthTestSuite(t *testing.T) {

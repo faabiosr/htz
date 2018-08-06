@@ -1,7 +1,9 @@
 package htz
 
 import (
+	"encoding/json"
 	"fmt"
+	"net/http"
 	"time"
 )
 
@@ -97,4 +99,16 @@ func (ct CheckType) MarshalJSON() ([]byte, error) {
 	}
 
 	return []byte(`"unknown"`), nil
+}
+
+// ServerHTTP retrieves the health status.
+func (h *Health) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+
+	_ = json.NewEncoder(w).Encode(h.Check())
 }
