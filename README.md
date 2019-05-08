@@ -1,10 +1,10 @@
 # Htz
 
-[![Build Status](https://img.shields.io/travis/fabiorphp/htz/master.svg?style=flat-square)](https://travis-ci.org/fabiorphp/htz)
-[![Codecov branch](https://img.shields.io/codecov/c/github/fabiorphp/htz/master.svg?style=flat-square)](https://codecov.io/gh/fabiorphp/htz)
-[![GoDoc](https://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat-square)](https://godoc.org/github.com/fabiorphp/htz)
-[![Go Report Card](https://goreportcard.com/badge/github.com/fabiorphp/htz?style=flat-square)](https://goreportcard.com/report/github.com/fabiorphp/htz)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://github.com/fabiorphp/htz/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/travis/faabiosr/htz/master.svg?style=flat-square)](https://travis-ci.org/faabiosr/htz)
+[![Codecov branch](https://img.shields.io/codecov/c/github/faabiosr/htz/master.svg?style=flat-square)](https://codecov.io/gh/faabiosr/htz)
+[![GoDoc](https://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat-square)](https://godoc.org/github.com/faabiosr/htz)
+[![Go Report Card](https://goreportcard.com/badge/github.com/faabiosr/htz?style=flat-square)](https://goreportcard.com/report/github.com/faabiosr/htz)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](https://github.com/faabiosr/htz/blob/master/LICENSE)
 
 Go healthcheck for your apps
 
@@ -13,13 +13,13 @@ Go healthcheck for your apps
 Htz requires Go 1.10 or later.
 
 ```
-go get github.com/fabiorphp/htz
+go get github.com/faabiosr/htz
 ```
 
 If you want to get an specific version, please use the example below:
 
 ```
-go get gopkg.in/fabiorphp/htz.v0
+go get gopkg.in/faabiosr/htz.v0
 ```
 
 ## Usage
@@ -31,7 +31,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/fabiorphp/htz"
+	"github.com/faabiosr/htz"
 	"time"
 )
 
@@ -63,7 +63,7 @@ func main() {
 package main
 
 import (
-	"github.com/fabiorphp/htz"
+	"github.com/faabiosr/htz"
 	"net/http"
 	"time"
 )
@@ -102,8 +102,8 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	"github.com/fabiorphp/htz"
-	"github.com/fabiorphp/htz/checker"
+	"github.com/faabiosr/htz"
+	"github.com/faabiosr/htz/checker"
 	_"github.com/lib/pq"
 )
 
@@ -124,8 +124,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/fabiorphp/htz"
-	"github.com/fabiorphp/htz/checker"
+	"github.com/faabiosr/htz"
+	"github.com/faabiosr/htz/checker"
     "github.com/go-redis/redis"
 )
 
@@ -147,8 +147,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/fabiorphp/htz"
-	"github.com/fabiorphp/htz/checker"
+	"github.com/faabiosr/htz"
+	"github.com/faabiosr/htz/checker"
 )
 
 func main() {
@@ -192,4 +192,4 @@ make test
 
 ## License
 
-This project is released under the MIT licence. See [LICENSE](https://github.com/fabiorphp/htz/blob/master/LICENSE) for more details.
+This project is released under the MIT licence. See [LICENSE](https://github.com/faabiosr/htz/blob/master/LICENSE) for more details.

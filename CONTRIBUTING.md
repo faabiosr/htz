@@ -12,9 +12,9 @@ Prerequisites:
 Clone `htz` from source into `$GOPATH`:
 
 ```sh
-$ mkdir -p $GOPATH/src/github.com/fabiorphp/htz
+$ mkdir -p $GOPATH/src/github.com/faabiosr/htz
 $ cd $_
-$ git clone git@github.com:fabiorphp/htz.git
+$ git clone git@github.com:faabiosr/htz.git
 $ cd htz
 ```
 

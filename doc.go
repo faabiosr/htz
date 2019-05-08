@@ -8,7 +8,7 @@
 //	import (
 //		"encoding/json"
 //		"fmt"
-//		"github.com/fabiorphp/htz"
+//		"github.com/faabiosr/htz"
 //		"time"
 //	)
 //
@@ -38,7 +38,7 @@
 //	package main
 //
 //	import (
-//		"github.com/fabiorphp/htz"
+//		"github.com/faabiosr/htz"
 //		"net/http"
 //		"time"
 //	)
